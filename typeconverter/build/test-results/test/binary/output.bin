@@ -1,0 +1,2 @@
+m12:59:13.926 [Test worker] INFO hello.typeconverter.converter.StringToIntegerConverter -- convert source=10
+o12:59:13.973 [Test worker] INFO hello.typeconverter.converter.IntegerToStringConverter -- convert source={}10

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="hello.typeconverter.converter.ConverterTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-08-23T03:59:13" hostname="DESKTOP-VRJVUQG" time="0.098">
+  <properties/>
+  <testcase name="stringToInteger()" classname="hello.typeconverter.converter.ConverterTest" time="0.093"/>
+  <testcase name="integerToString()" classname="hello.typeconverter.converter.ConverterTest" time="0.003"/>
+  <system-out><![CDATA[12:59:13.926 [Test worker] INFO hello.typeconverter.converter.StringToIntegerConverter -- convert source=10
+12:59:13.973 [Test worker] INFO hello.typeconverter.converter.IntegerToStringConverter -- convert source={}10
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
