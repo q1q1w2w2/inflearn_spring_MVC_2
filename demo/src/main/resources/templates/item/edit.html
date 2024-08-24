@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <div th:replace="fragment/bodyHeader :: bodyHeader" />
+
+    <div>
+        <h2>상품 수정</h2>
+    </div>
+
+    <form method="post" th:object="${item}" th:action="@{/item/edit/{itemId}(itemId=${item.id})}">
+
+        <div>
+            <label>ID</label>
+            <input type="text" th:field="*{id}" readonly>
+        </div>
+
+        <div>
+            <label>상품명</label>
+            <input type="text" th:field="*{itemName}" placeholder="상품명을 입력하세요.">
+        </div>
+
+        <div>
+            <label>가격</label>
+            <input type="text" th:field="*{price}" placeholder="가격을 입력하세요.">
+        </div>
+
+        <div>
+            <label>수량</label>
+            <input type="text" th:field="*{quantity}" placeholder="수량을 입력하세요.">
+        </div>
+
+        <button type="submit">제출</button>
+    </form>
+</div>
+
+</body>
+</html>

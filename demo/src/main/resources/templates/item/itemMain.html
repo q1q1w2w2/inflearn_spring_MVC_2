@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <div th:replace="fragment/bodyHeader :: bodyHeader" />
+
+    <div>
+        <button th:onclick="|location.href='@{/item/list}'|">상품 목록</button>
+    </div>
+    </br>
+
+    <div>
+        <button th:onclick="|location.href='@{/item/add}'|">상품 생성</button>
+    </div>
+</div>
+
+</body>
+</html>
