@@ -17,7 +17,7 @@ public class ItemService {
     private final ItemRepository itemRepository;
 
     @Transactional
-    public Long save(Item item) {
+    public Item save(Item item) {
         return itemRepository.save(item);
     }
 

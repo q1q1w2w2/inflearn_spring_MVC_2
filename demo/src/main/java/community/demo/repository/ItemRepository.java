@@ -24,9 +24,9 @@ public class ItemRepository {
         this.queryFactory = new JPAQueryFactory(em);
     }
 
-    public Long save(Item item) {
+    public Item save(Item item) {
         em.persist(item);
-        return item.getId();
+        return item;
     }
 
     public Item findById(Long id) {

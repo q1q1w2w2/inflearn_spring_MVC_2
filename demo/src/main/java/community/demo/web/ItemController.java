@@ -1,15 +1,18 @@
 package community.demo.web;
 
 import community.demo.domain.Item;
-import community.demo.web.form.ItemDto;
-import community.demo.repository.ItemRepository;
+import community.demo.web.form.ItemAddForm;
 import community.demo.service.ItemService;
 import community.demo.web.form.ItemUpdateForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequiredArgsConstructor
@@ -18,7 +21,6 @@ import org.springframework.web.bind.annotation.*;
 public class ItemController {
 
     private final ItemService itemService;
-    private final ItemRepository itemRepository;
 
     @GetMapping
     public String itemMain() {
@@ -27,15 +29,22 @@ public class ItemController {
 
     @GetMapping("/add")
     public String add(Model model) {
-        model.addAttribute("itemDto", new ItemDto());
+        model.addAttribute("itemAddForm", new ItemAddForm());
         return "item/add";
     }
 
     @PostMapping("/add")
-    public String addItem(@ModelAttribute ItemDto itemDto) {
-        Item item = new Item(itemDto.getItemName(), itemDto.getPrice(), itemDto.getQuantity());
+    public String addItem(@Validated @ModelAttribute ItemAddForm form, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
+            log.info("bindingResult= {}", bindingResult);
+            return "/item/add";
+        }
+
+        Item item = new Item(form.getItemName(), form.getPrice(), form.getQuantity());
         itemService.save(item);
-        return "redirect:/item/list";
+        redirectAttributes.addAttribute("itemId", item.getId());
+        redirectAttributes.addAttribute("status", true);
+        return "redirect:/item/detail/{itemId}";
     }
 
     @GetMapping("/list")
@@ -58,10 +67,18 @@ public class ItemController {
     }
 
     @PostMapping("/edit/{itemId}")
-    public String editItem(@PathVariable Long itemId, @ModelAttribute ItemUpdateForm form) {
+    public String editItem(@PathVariable Long itemId, @Validated @ModelAttribute("item") ItemUpdateForm form, BindingResult bindingResult) {
         log.info("*** edit post 요청 ***");
         log.info("itemUpdateForm: {}", form);
+
+        if (bindingResult.hasErrors()) {
+            log.info("bindingResult= {}", bindingResult);
+            return "item/edit";
+        }
+
         itemService.updateItem(itemId, form);
-        return "redirect:/item/list";
+
+        return "redirect:/item/detail/{itemId}";
     }
+
 }

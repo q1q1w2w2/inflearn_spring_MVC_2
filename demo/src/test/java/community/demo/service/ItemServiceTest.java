@@ -27,11 +27,10 @@ class ItemServiceTest {
         Item item = new Item("itemA", 10000, 200);
 
         // when
-        Long saveId = itemRepository.save(item);
+        Item savedItem = itemRepository.save(item);
 
         // then
-        Item findItem = itemRepository.findById(saveId);
-        assertThat(findItem).isEqualTo(item);
+        assertThat(savedItem).isEqualTo(item);
     }
 
     @Test
