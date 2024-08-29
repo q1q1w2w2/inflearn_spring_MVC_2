@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <div th:replace="fragment/bodyHeader :: bodyHeader" />
+
+    <div>
+        <h2>상품 상세</h2>
+    </div>
+
+    <div th:if="${param.status}">
+        <h3 th:text="'저장 완료'"></h3>
+    </div>
+
+    <div>
+        <label>ID</label>
+        <input type="text" th:field="${item.id}" disabled>
+    </div>
+
+    <div>
+        <label>상품명</label>
+        <input type="text" th:field="${item.itemName}" disabled>
+    </div>
+
+    <div>
+        <label>가격</label>
+        <input type="text" th:field="${item.price}" disabled>
+    </div>
+
+    <div>
+        <label>수량</label>
+        <input type="text" th:field="${item.quantity}" disabled>
+    </div>
+
+    <button th:onclick="|location.href='@{/item/edit/{itemId}(itemId=${item.id})}'|">수정</button>
+
+</div>
+
+</body>
+</html>

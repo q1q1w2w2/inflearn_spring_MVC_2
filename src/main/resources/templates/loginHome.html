@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+
+    <div>
+        <h2>메인 페이지</h2>
+    </div>
+
+    <div>
+        <h4 th:text="|[${member.name}]님 로그인|">~님 로그인</h4>
+    </div>
+
+    <div>
+        <button th:onclick="|location.href='@{/item}'|">상품관리</button>
+    </div>
+    </br>
+
+    <form th:action="@{/logout}" method="post">
+        <div>
+            <button th:onclick="|location.href='@{/logout}'|">로그아웃</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
