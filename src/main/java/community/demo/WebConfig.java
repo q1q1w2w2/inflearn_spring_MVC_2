@@ -2,6 +2,8 @@ package community.demo;
 
 import community.demo.exception.resolver.MyHandlerExceptionResolver;
 import community.demo.exception.resolver.UserhandlerExceptionResolver;
+import community.demo.typeconverter.converter.IntegerToStringConverter;
+import community.demo.typeconverter.converter.StringToIntegerConverter;
 import community.demo.web.argumentResolver.LoginMemberArgumentResolver;
 import community.demo.web.filter.LogFilter;
 import community.demo.web.filter.LoginCheckFilter;
@@ -12,6 +14,7 @@ import jakarta.servlet.Filter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -21,6 +24,12 @@ import java.util.List;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
+
+//    @Override
+//    public void addFormatters(FormatterRegistry registry) {
+//        registry.addConverter(new StringToIntegerConverter());
+//        registry.addConverter(new IntegerToStringConverter());
+//    }
 
     @Override
     public void extendHandlerExceptionResolvers(List<HandlerExceptionResolver> resolvers) {
