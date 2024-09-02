@@ -2,6 +2,7 @@ package community.demo.web;
 
 import community.demo.domain.Member;
 import community.demo.repository.MemberRepository;
+import community.demo.web.argumentResolver.Login;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -19,8 +20,19 @@ public class HomeController {
 
     private final MemberRepository memberRepository;
 
+//    @GetMapping("/")
+    public String homeLogin(@SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember, Model model) {
+
+        if (loginMember == null) {
+            return "home";
+        }
+
+        model.addAttribute("member", loginMember);
+        return "loginHome";
+    }
+
     @GetMapping("/")
-    public String home(@SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember, Model model) {
+    public String homeLoginArgumentResolver(@Login Member loginMember, Model model) {
 
         if (loginMember == null) {
             return "home";
